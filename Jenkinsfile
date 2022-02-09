@@ -13,7 +13,8 @@ pipeline {
         }
         stage('Release') { 
             steps {
-                bat 'git tag -a tagName -m "Merging to release"'
+                bat 'git config --global user.email "jenkins@localhost"'
+                bat 'git config --global user.name "jenkins"'
                 bat 'git merge origin/release'
                 bat 'git commit -m "merging dev to release"'
                 bat 'git push origin release'
