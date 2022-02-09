@@ -4,12 +4,11 @@ pipeline {
         stage('Docker compose') { 
             steps {
                 bat 'docker-compose build'
-                bat 'docker-compose up -d'
             }
         }
         stage('Test') { 
             steps {
-                bat 'npm test'
+                bat 'docker-compose up -d'
             }
         }
         stage('Release') { 
