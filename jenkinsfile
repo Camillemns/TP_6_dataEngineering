@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Docker compose') { 
+            steps {
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
+            }
+        }
+        stage('Release') { 
+            steps {
+                sh 'git merge release'
+                sh 'git commit -m "merging dev to release"'
+                sh 'git push origin release'
+            }
+        }
+    }
+    post {
+      always {
+         sh "docker-compose down || true"
+      }
+    }   
+}
