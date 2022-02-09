@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Release') { 
             steps {
-                bat 'git merge release'
+                bat 'git merge origin/release'
                 bat 'git commit -m "merging dev to release"'
                 bat 'git push origin release'
             }
